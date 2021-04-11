@@ -162,10 +162,7 @@ function App()
 
 	const loadCities = () =>{
 		
-		console.log(currentState)
 		return currentState.city.map((city,index) => {
-			if (index === 0)
-				return <option value={index} id ="city-name" selected>{city.name}</option>
 			return <option value={index} id ="city-name" >{city.name}</option>
 		});
 	}
@@ -173,8 +170,6 @@ function App()
 	const loadLandmarks = () =>{
 		
 		return currentCity.landmarks.map((landmark,index) => {
-			if (index === 0)
-				return <option value={index} id ="landmark-name" Selected >{landmark.name}</option> 
 			return <option value={index} id ="landmark-name">{landmark.name}</option>
 		})
 	}
@@ -182,9 +177,7 @@ function App()
 	const handleStateChange = (e) =>{
 		const newState = states[e.target.value]
 	
-		setcurrentState(()=>{
-			return newState;
-		})
+		setcurrentState(newState)
 
 		setCurrentCity(newState.city[0]);
 		setCurrentLandMark(newState.city[0].landmarks[0])
