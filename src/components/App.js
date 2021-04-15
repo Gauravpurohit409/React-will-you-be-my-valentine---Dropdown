@@ -143,8 +143,8 @@ function App()
 {
 	// Do not alter/remove main div
 	const [currentState, setcurrentState] = useState(states[0])
-	const [currentCity, setCurrentCity] = useState(states[0].city[0])
-	const [currentLandMark, setCurrentLandMark] = useState(states[0].city[0].landmarks[0])
+	const [currentCity, setCurrentCity] = useState(currentState.city[0])
+	const [currentLandMark, setCurrentLandMark] = useState(currentCity.landmarks[0])
 
 	const [stateDescription, setStateDescription] = useState(currentState.description);
 	const [cityDescription, setCityDescription] = useState(currentCity.description)
