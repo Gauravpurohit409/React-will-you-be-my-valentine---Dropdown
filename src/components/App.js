@@ -1,4 +1,4 @@
-import React, { useState,useReducer } from "react";
+import React, { useState,useEffect } from "react";
 import "./../styles/App.css";
 
 
@@ -175,44 +175,52 @@ function App()
 	}
 	
 	const handleStateChange = (e) =>{
-		const newState = states[e.target.value]
+		
+		const newState = states[e.target.value];
+		setcurrentState(newState);
+
 	
-		setcurrentState(newState)
-
-		setCurrentCity(newState.city[0]);
-		setCurrentLandMark(newState.city[0].landmarks[0])
-
-		setStateDescription(newState.description);
 	}
 
 	const handleCityChange = (e) =>{
-		const newCity = currentState.city[e.target.value]
 
+		const newCity = currentState.city[e.target.value];
 		setCurrentCity(newCity);
-		setCurrentLandMark(newCity.landmarks[0])
-
-		setCityDescription(newCity.description)
 	}
 
 
 	const handleLandmarkChange = (e) =>{
 		const newLandMark = currentCity.landmarks[e.target.value];
-
 		setCurrentLandMark(newLandMark);
-		setLandmarkDescription(newLandMark.description);
 	}
+
+	useEffect(() => {
+		setStateDescription(currentState.description);
+		setCurrentCity(currentState.city[0]);
+	}, [currentState])
+
+	useEffect(() => {
+		
+		setCityDescription(currentCity.description)		
+		setCurrentLandMark(currentCity.landmarks[0])
+	}, [currentCity])
+	
+	useEffect(() => {
+
+		setLandmarkDescription(currentLandMark.description);
+	}, [currentLandMark])
 
 	return (
 	<div id="main">
-		<select id="state" onChange = {handleStateChange}>
+		<select id="state" onChange = {handleStateChange} >
 			{loadStates()}
 		</select>
 		<br></br>
-		<select id="city" onChange = {handleCityChange}>		
+		<select id="city" onChange = {handleCityChange} >		
 			{loadCities()}
 		</select>
 		<br></br>
-		<select id="landmark" onChange = {handleLandmarkChange}>
+		<select id="landmark" onChange = {handleLandmarkChange} >
 			{loadLandmarks()}
 		</select>
 
